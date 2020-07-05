@@ -8,12 +8,10 @@ class Client extends Model
 {
     protected $table = "clients";
     public $timestamps = false;
+    public $fillable = ['company_id' , 'name' , 'phone' , 'section'];
 
     public function User(){
         return $this->belongsTo('App\User');
     }
 
-    public function Action(){
-        return $this->belongsTo('App\Action');
-    }
 }

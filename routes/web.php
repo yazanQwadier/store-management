@@ -1,6 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Category;
+use App\Client;
+use App\Product;
+use App\Action;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,56 +17,92 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Route Main(welcome) Page
 Route::get('/', function () {
+    if(Auth::check()){
+        return redirect()->route('home');
+    }
+
     return view('welcome');
 });
 
+// All Routes for Auth
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// All Routes for (home) name.
+Route::name('home')->group(function(){
+    Route::get('/home', 'HomeController@index');
 
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-
-
-/* the following routes are for testing just.*/
-Route::get('/category/{id}' , function($id){
-    $cat = new App\Category();
-    $cat->company_id = 1;
-    $cat->name = "c ".$id;
-    $cat->description = "this is description of cat ".$id;
-    $cat->save();
+    Route::get('/home', 'HomeController@index');
 });
 
-Route::get('/product/{catId}/{prodId}' , function($catId , $prodId){
-    $product = new App\Product();
-    $product->cate_id = $catId;
-    $product->name = "p ".$prodId;
-    $product->price = 50;
-    $product->quantity = 12;
-    $product->img = "..." ;
-    $product->save();
+// All Routes for (Import/Export Product) createAction name.
+Route::name('CreateAction')->middleware('auth')->group(function(){
+    Route::get('/createAction' , function(){
+        $arr = [];
+        if( Auth::check() ){
+            $categories = Category::where( 'company_id' , Auth::id() )->get();
+            $arr["categories"] = $categories;
+
+            $clients = Client::where( 'company_id' , Auth::id() )->get();
+            $arr["clients"] = $clients;
+        }
+
+        return view('createAction' , $arr);
+    });
+
+    Route::post('/createAction' ,'productController@store');
 });
 
-Route::get('/clients/{id}' , function($id){
-    $c = new App\Client();
-    $c->company_id = 1;
-    $c->name = "c ".$id;
-    $c->phone =786862369;
-    $c->section = "techeniques";
-    $c->save();
+// All Routes for (Category) name.
+Route::name('Category')->middleware('auth')->group(function(){
+    Route::get('/category' , function(){
+        $arr = [];
+        $categories = Category::where( 'company_id' , Auth::id() )->get();
+        $arr["categories"] = $categories;
+        return view('category' , $arr);
+    });
+
+    Route::post('/showCategory', 'categoryController@show');
+
+    Route::post('/category' ,'categoryController@edit');
 });
 
-Route::get('/actions/{Company}/{client}/{product}' , function($Company , $client , $product){
-    $action = new App\Action();
-    $action->type = "invoice";
-    $action->company_id = $Company;
-    $action->client_id =  $client;
-    $action->product_id = $product;
-    $action->date =  date("2020-06-30 13:00");
-    $action->notes = "notes".$product;
-    $action->save();
+
+// All Routes for (Product) name.
+Route::name('Product')->middleware('auth')->group(function(){
+    Route::get('/product' , function(){
+        $products = Product::where( 'company_id' , Auth::id() )->get();
+        return view('product' , ['products' => $products]);
+    });
+
+    Route::post('/showProduct', 'productController@show');
+
+    Route::post('/product' ,'productController@edit');
+
+    Route::post('/REMproduct' ,'productController@destroy');
 });
-/* the above routes are for testing just.*/
+
+
+// All Routes for (Client) name.
+Route::name('Client')->middleware('auth')->group(function(){
+    Route::get('/client' , function(){
+        $clients = Client::where( 'company_id' , Auth::id() )->get();
+        return view('client' , ['clients' => $clients]);
+    });
+
+    Route::post('/showClient', 'clientController@show');
+
+    Route::post('/client' ,'clientController@edit');
+
+    Route::post('/REMclient', 'clientController@destroy');
+
+    Route::post('/addClient' , 'clientController@store');
+});
+
+
+// Routes for (Action) name.
+Route::get('/action' , function(){
+    $actions = Action::where( 'company_id' , Auth::id() )->orderBy('id', 'desc')->get();
+    return view('action' , ['actions' => $actions]);
+})->middleware('auth')->name('Action');

@@ -20,14 +20,13 @@ class ActionsMigration extends Migration
             $table->unsignedBigInteger('company_id');
             $table->foreign('company_id')->references('id')->on('users')->onDelete('cascade');;
 
-            $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');;
-
-            $table->unsignedBigInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');;
+            $table->string('client_name');
+            $table->string('product_name');
+            $table->integer('price');
+            $table->string('quantity');
 
             $table->date('date');
-            $table->string('notes');
+            $table->string('notes')->nullable();
         });
     }
 
@@ -38,8 +37,8 @@ class ActionsMigration extends Migration
      */
     public function down()
     {
-        Schema::table('actions', function (Blueprint $table) {
-            //
+        Schema::create('actions', function (Blueprint $table) {
+
         });
     }
 }

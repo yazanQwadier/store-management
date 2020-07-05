@@ -16,7 +16,9 @@ class ProductMigration extends Migration
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('cate_id');
-            $table->foreign('cate_id')->references('id')->on('categories')->onDelete('cascade');;
+            $table->foreign('cate_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unsignedBigInteger('company_id');
+            $table->foreign('company_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('name');
             $table->integer('price');
             $table->integer('quantity');
