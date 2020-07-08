@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('styles')
+    <link href="css/category.css" rel="stylesheet" />
+@endsection
+
 @section('content')
 
     @if(session('success'))
@@ -17,38 +21,59 @@
     </div>
     @endif
 
+
     <!-- show all categories info -->
-    @foreach($categories as $category)
-        <div style="border:1px solid #ccc;">
-            <h4>{{ $category->name }}</h4>
-            <p>{{ $category->description }}</p>
-            <button class="editCategoryBtn" id="{{ $category->id }}">Edit</button>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-11 col-lg-8 p-1">
+            @foreach($categories as $category)
+                <div class="row justify-content-center category-item">
+                    <div class="col-9">
+                        <h4>{{ $category->name }}</h4>
+                        <div class="col-9 offset-1">
+                            <p>{{ $category->description }}</p>
+                        </div>
+                    </div>
+
+                    <div class="col-2 text-center pt-3">
+                        <button class="btn btn-info editCategoryBtn" id="{{ $category->id }}">Edit</button>
+                    </div>
+                </div>
+            @endforeach
+            </div>
         </div>
-    @endforeach
+    </div>
 
     <!-- edit categories form -->
-    <div class="EditCateForm" style="display:none;">
-        <button class="CloseFormBtn">X</button>
-        <form action="/category" method="post">
+    <div class="EditCateForm">
+
+        <form action="/category" method="post" class="col-9 col-md-6 col-lg-5 cateForm">
             @csrf
-            <div>
+            <div class="col text-right">
+                <button type="button" class="btn btn-danger CloseFormBtn"><i class="fas fa-times fa-1x"></i></button>
+            </div>
+
+            <div class="col">
                 <label for="E_Name_C">Name :</label>
-                <input type="text" name="E_Name_C" id="E_Name_C" class="@error('E_Name_C') is-invalid  @enderror">
+                <input type="text" name="E_Name_C" id="E_Name_C" class="form-control @error('E_Name_C') is-invalid  @enderror">
             </div>
 
-            <div>
+            <div class="col">
                 <label for="E_Desc_C">Description :</label>
-                <input type="text" name="E_Desc_C" id="E_Desc_C" class="@error('E_Desc_C') is-invalid  @enderror">
+                <textarea name="E_Desc_C" id="E_Desc_C" cols="30" rows="10" class="form-control @error('E_Desc_C') is-invalid  @enderror"></textarea>
             </div>
 
-            <div>
+            <div class="col">
                 <label for="countP">Count Products :</label>
-                <h3 id="countP"></h3>
+                <h3 id="countP">0</h3>
             </div>
 
             <input type="hidden" name="idCate" id="idCate">
 
-            <input type="submit" value="edit">
+            <div class="col text-center">
+                <button type="submit" class="btn btn-success">edit <i class="fas fa-edit"></i></button> <!-- submit for edit product -->
+            </div>
+
         </form>
     </div>
 @endsection

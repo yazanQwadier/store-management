@@ -3,6 +3,8 @@ $(document).ready(function(){
     $(".editProductBtn").on("click" , function(e){
         e.preventDefault();
 
+        var top = $(this).offset().top;
+
         $.ajax({
            type:'POST',
            url:'/showProduct',
@@ -20,10 +22,10 @@ $(document).ready(function(){
               for(var i in data.categories){
                 options+= '<option>'+data.categories[i]['name']+'</option>';
               }
-
               $("#categories_P").html(options);
 
-              $('.EditProdForm').show("slow");
+              $('.EditProdForm').css({"top" : top/2 });
+              $('.EditProdForm').fadeIn("slow");
            }
         });
 
@@ -31,7 +33,24 @@ $(document).ready(function(){
 
 
     $('.EditProdForm .CloseFormBtn').on('click' , function(){
-        $(this).parent().hide("slow");
+        $(".EditProdForm").fadeOut("slow");
     });
 
 });
+
+// function to confirm if user want to delete the product.
+function confirmDel(){
+    var q = confirm("Are you sure you want to delete ?");
+    if (q) {
+
+        $.ajax({
+            type:'POST',
+            url:'/REMproduct',
+            data:{idProd: $("#idProd").val() } ,
+
+            success:function(data){
+               window.location.reload();
+            }
+         });
+    }
+}

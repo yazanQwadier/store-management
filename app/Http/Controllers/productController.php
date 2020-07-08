@@ -115,7 +115,7 @@ class productController extends Controller
         if($found_prod == 0){
 
             $found_cat = Category::where("name" , $request["categP".$i] )->get();
-            if( count($found_cat) == 0){
+            if( count($found_cat) == 0 ){
                 $cat = Category::create([
                     'company_id' => Auth::id() ,
                     'name'      =>  $request["categP".$i]
@@ -193,8 +193,8 @@ class productController extends Controller
 
         $input = $request->all();
         // get name of current category of product from database
-        $current_cate = Product::find( $input['idProd'] )->get()[0]['cate_id'];
-        $name_current_cate = Category::find($current_cate)->get()[0]['name'];
+        $current_cate = Product::find( $input['idProd'] )['cate_id'];
+        $name_current_cate = Category::find($current_cate)['name'];
 
         // if entered category the same the category in database
         $new_category = $current_cate;

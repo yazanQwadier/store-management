@@ -18,6 +18,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @yield('styles')
 </head>
 <body>
     <div id="app">
@@ -57,7 +58,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
+                                                document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
 
@@ -72,26 +73,26 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="py-5" style="min-height: 85vh;">
             @yield('content')
         </main>
 
 
         <!-- Footer -->
         <footer class="page-footer font-small blue">
-
-        <!-- Copyright -->
-        <div class="footer-copyright text-center py-3">© 2020 Copyright:
-            <a href="https://web.facebook.com/yazanqwaider98/"> Yazan Qwaider </a>
-        </div>
-        <!-- Copyright -->
-
+            <!-- Copyright -->
+            <div class="footer-copyright text-center py-3">© 2020 Copyright:
+                <a href="https://web.facebook.com/yazanqwaider98/"> Yazan Qwaider </a>
+            </div>
+            <!-- Copyright -->
         </footer>
         <!-- Footer -->
     </div>
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
+    <script src="js/app.js"></script>
     <script src="js/home.js"></script>
     @yield('scripts')
 </body>

@@ -1,0 +1,59 @@
+.formAddclient{
+    margin: -2vh auto 5vh auto;
+    background-color: #7d7d7d;
+    padding: 10px;
+}
+
+.formAddclient label{
+    color: white;
+}
+
+.btnAddClient{
+    margin-top: 25px;
+}
+
+table{
+    border:1px solid #ccc;
+    margin:5px auto;
+}
+
+table thead{
+    border:1px solid #ccc;
+    background-color: #f4f4f4;
+    text-align: center;
+}
+
+table tr{
+    margin-top:8px;
+    border-bottom: 1px solid #ccc;
+}
+
+table tbody tr:hover{
+    background-color: #399339b3;
+    color: white;
+}
+
+table tr td  {
+    padding: 11px 26px;
+}
+
+.EditClientForm{
+    position: absolute;
+    top:10%;
+    left:auto;
+    width: 100%;
+    display: none;
+}
+
+.EditClientForm .clientForm{
+    margin: 0 auto;
+    background-color: #373737;
+    padding: 5px;
+    box-shadow: 1px 1px 40px #9f9f9f;
+    border: 1px solid #737373;
+    border-radius: 10px;
+}
+
+.clientForm label{
+    color: white;
+}

@@ -1,0 +1,39 @@
+.category-item{
+    border: 1px dashed #6a6a6a;
+    margin-top: 8px;
+    background-color: #f0f8ff75;
+    border-radius: 15px;
+    transition: 0.4s;
+}
+
+.category-item:hover{
+    background-color: #b5d3ee75;
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+.EditCateForm{
+    position: absolute;
+    top:10%;
+    left:auto;
+    width: 100%;
+    display: none;
+}
+
+.EditCateForm .cateForm{
+    margin: 0 auto;
+    background-color: #373737;
+    padding: 5px;
+    box-shadow: 1px 1px 40px #9f9f9f;
+    border: 1px solid #737373;
+    border-radius: 10px;
+}
+
+.cateForm label ,
+.cateForm h3 {
+    color:white;
+}
+
+#countP{
+    display: inline-block;
+}

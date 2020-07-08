@@ -8,16 +8,13 @@
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+
 
         <!-- Styles -->
         <style>
             html, body {
-                background-color: #fff;
-                background-image: url('backImg.svg');
-                background-repeat: no-repeat;
-                background-size: contain;
-                background-attachment: fixed;
-                background-position: center;
+                background-color: #fefefe;
                 color: #636b6f;
                 font-family: 'Nunito', sans-serif;
                 font-weight: 200;
@@ -25,76 +22,99 @@
                 margin: 0;
             }
 
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
+            .back{
+                background-image: url('backImg.svg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position:center;
+                height:100vh;
             }
 
             .title {
-                font-size: 84px;
-                color:#ee6a6a;
+                margin-top:14vh;
+                color:#515151;
+                font-size:43px;
+            }
+
+            .brief{
+                margin-top:2vh;
+                font-size:28px;
+                text-shadow:1px 1px 1px #ccc;
+            }
+
+            .links{
             }
 
             .links > a {
-                color: #4a94b9;
-                padding: 0 25px;
                 font-size: 14px;
                 font-weight: 600;
                 letter-spacing: .1rem;
                 text-decoration: none;
                 text-transform: uppercase;
+                margin: 3px;
+                display: inline-block;
+                color: white;
             }
 
-            .m-b-md {
-                margin-bottom: 30px;
+            .links .login-link{
+                background-color: #f66;
+                padding: 11px 17px;
+            }
+
+            .links .reg-link{
+                background-color: #646464;
+                padding: 9px 17px;
+            }
+
+            .links a:hover{
+                color: #6c63ff;
             }
         </style>
     </head>
     <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
 
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
+        <div class="container">
+
+            <div class="row">
+                <div class="col-xs-12 col-md-6 back">
+                    <div class="row">
+
+                        <div class="col-8">
+                            @if (Route::has('login'))
+                                <div class="text-center links">
+                                    @auth
+                                        <a href="{{ url('/home') }}">Home</a>
+                                    @else
+                                        <a class="login-link" href="{{ route('login') }}">Login</a>
+
+                                        @if (Route::has('register'))
+                                            <a class="reg-link" href="{{ route('register') }}">Register</a>
+                                        @endif
+                                    @endauth
+                                </div>
+                            @endif
+                        </div>
+
+                    </div>
                 </div>
-            @endif
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Store Management
-                </div>
+                <div class="col-xs-12 col-md-6">
+                    <div class="row">
+                        <div class="col text-center h1 title">
+                            Store Management
+                        </div>
+                    </div>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <div class="row">
+                        <div class="col-8 offset-2 text-center h5 brief">
+                            Create your own warehouse, add your products, and keep your business record. <br>Free
+                        </div>
+                    </div>
                 </div>
             </div>
+
         </div>
+
+        <script src="{{ asset('js/app.js') }}"></script>
     </body>
 </html>

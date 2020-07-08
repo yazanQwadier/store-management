@@ -1,0 +1,38 @@
+.product-item{
+    padding: 15px;
+    font-size: 15px;
+    border: 1px solid #9b9b9b63;
+    border-radius: 13px;
+    margin: 5px;
+    background-color: #4d4d4d;
+    color: #fff7d5;
+    box-shadow: 1px 1px 5px #ccc;
+    transition: 0.4s;
+}
+
+.product-item > div:nth-child(1) {
+    color: white;
+}
+
+.product-item:hover{
+    transform: scale(1.04);
+    box-shadow: 1px 1px 20px #ccc;
+    cursor: pointer;
+}
+
+.EditProdForm{
+    position: absolute;
+    top:10%;
+    left:auto;
+    width: 100%;
+    display: none;
+}
+
+.EditProdForm .prodForm{
+    margin: 0 auto;
+    background-color: #373737;
+    padding: 5px;
+    box-shadow: 1px 1px 40px #9f9f9f;
+    border: 1px solid #737373;
+    border-radius: 10px;
+}

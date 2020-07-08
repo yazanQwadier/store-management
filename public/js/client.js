@@ -3,6 +3,8 @@ $(document).ready(function(){
     $(".editClientBtn").on("click" , function(e){
         e.preventDefault();
 
+        var top = $(this).offset().top;
+
         $.ajax({
            type:'POST',
            url:'/showClient',
@@ -13,7 +15,9 @@ $(document).ready(function(){
               $("#E_Name_C").val(data.client.name);
               $("#E_Phone_C").val(data.client.phone);
               $("#E_Section_C").val(data.client.section);
-              $('.EditClientForm').show("slow");
+
+              $('.EditClientForm').css({"top" : top/2 });
+              $('.EditClientForm').fadeIn("slow");
            }
         });
 
@@ -21,7 +25,25 @@ $(document).ready(function(){
 
 
     $('.CloseFormBtn').on('click' , function(){
-        $('.EditClientForm').hide('slow');
+        $('.EditClientForm').fadeOut('slow');
     });
 
 });
+
+
+// function to confirm if user want to delete the product.
+function confirmDel(){
+    var q = confirm("Are you sure you want to delete ?");
+    if (q) {
+
+        $.ajax({
+            type:'POST',
+            url:'/REMclient',
+            data:{idClient: $("#idClient").val() } ,
+
+            success:function(data){
+               window.location.reload();
+            }
+         });
+    }
+}
