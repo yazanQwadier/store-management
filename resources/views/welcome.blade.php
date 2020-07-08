@@ -11,6 +11,8 @@
         <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 
+         <script src="{{ asset('js/app.js') }}" defer></script>
+
         <!-- Styles -->
         <style>
             html, body {
@@ -79,7 +81,7 @@
                 <div class="col-xs-12 col-md-6 back">
                     <div class="row">
 
-                        <div class="col-8">
+                        <div class="col-xs col-md-8 d-block d-md-none text-center">
                             @if (Route::has('login'))
                                 <div class="text-center links">
                                     @auth
@@ -110,11 +112,32 @@
                             Create your own warehouse, add your products, and keep your business record. <br>Free
                         </div>
                     </div>
+
+                    <div class="row d-none d-md-block">
+                        <div class="col text-center">
+                            @if (Route::has('login'))
+                                <div class="text-center links">
+                                    @auth
+                                        <a href="{{ url('/home') }}">Home</a>
+                                    @else
+                                        <a class="login-link" href="{{ route('login') }}">Login</a>
+
+                                        @if (Route::has('register'))
+                                            <a class="reg-link" href="{{ route('register') }}">Register</a>
+                                        @endif
+                                    @endauth
+                                </div>
+                            @endif
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
         </div>
 
         <script src="{{ asset('js/app.js') }}"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <script src="js/app.js"></script>
     </body>
 </html>
